@@ -1,10 +1,9 @@
-import './App.css'
+import "./App.css";
 
 export default function App() {
   return (
     <main>
-      <h6>Todo List</h6>
-      
+      <h4>Todo List</h4>
     </main>
-  )
+  );
 }
