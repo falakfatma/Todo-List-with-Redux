@@ -16,7 +16,6 @@ export default function App() {
             Todo List 
           </h4>
           <TodoCom />
-          {/* TODO CARDS */}
         </div>
       </main>
     </Provider>

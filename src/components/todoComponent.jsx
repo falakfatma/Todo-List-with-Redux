@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { store } from './redux_Lib/store'
-import { ADD_TODO, OnAddTodo } from "./redux_Lib/action";
-import { useEffect } from "react";
+import { OnAddTodo } from "./redux_Lib/action";
+
 const TodoCom = () => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-
-  const TextWritingFunction = (e) => {
-    // setText(()=>e.target.value)
-    console.log("onInput");
-  };
-
+// CRUD ------- CREATE READ UPDATE DELETE
+  // CREATE 
+  // UPDATING STATE
   return (
     <>
       <input
@@ -27,10 +23,12 @@ const TodoCom = () => {
       </button>
           {
             todos.map((todo)=>{
-              return <div 
-                      className="bg-gray-200 m-1 p-2 rounded">
-                        {todo}
-                    </div>
+              return (
+                <div 
+                  className="bg-gray-200 m-1 p-2 rounded">
+                    {todo}
+                </div>
+              )
             })
           }
     </>
