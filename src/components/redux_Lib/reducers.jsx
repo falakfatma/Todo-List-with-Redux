@@ -1,5 +1,5 @@
 const initialState = {
-  todos: [0],
+  todos: [],
 };
 export const AddTodos = (state = initialState, action) => {
   switch (action.type) {
