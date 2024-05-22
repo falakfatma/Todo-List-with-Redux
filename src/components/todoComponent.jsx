@@ -6,7 +6,6 @@ const TodoCom = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [error, setError] = useState("");
-  console.log(text.length);
   // CRUD ------- CREATE READ UPDATE DELETE
   // CREATE
   // UPDATING STATE
@@ -24,6 +23,17 @@ const TodoCom = () => {
     console.log("update", todos[id]);
     
   };
+  
+  const handleDeleteTodo = (id) => {
+    // const editedTodo = prompt('Edit Todo')
+    todos.filter((todo,indexedDB,arr)=>{
+      if(indexedDB === id){
+        arr.splice(indexedDB,1)
+      }
+    })
+    console.log("after delete", todos);
+  };
+  
   return (
     <>
       <input
@@ -39,15 +49,32 @@ const TodoCom = () => {
       </button>
       {error}
       {todos.map((todo, id) => {
+      if (todo.length > 0){
+        
         return (
           <div
             key={id}
             className="bg-gray-200 m-1 p-2 rounded flex justify-between	"
           >
             {todo}
-            <h1 onClick={handleUpdateTodo(id)}>edit</h1>
+            <div>
+            <h1 
+              className="text-blue-500" 
+              onClick={()=>handleUpdateTodo(id)}>
+              Edit
+            </h1>
+            <h1 
+              className="text-red-500" 
+              onClick={()=>handleDeleteTodo(id)}>
+              Delete
+            </h1>
+            </div>
           </div>
         );
+      }
+      else{
+        return;
+      }
       })}
     </>
   );
