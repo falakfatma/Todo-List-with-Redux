@@ -6,19 +6,24 @@ const TodoCom = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [error, setError] = useState("");
-  console.log(text.length)
+  console.log(text.length);
   // CRUD ------- CREATE READ UPDATE DELETE
   // CREATE
   // UPDATING STATE
-  const handleAddTodo = ()=>{
-    if(text.length === 0){
-      setError("Please enter a todo")
-    }else{
-      dispatch(OnAddTodo(text))
-      setText("")
-      setError("")
+  const handleAddTodo = () => {
+    if (text.length === 0) {
+      setError("Please enter a todo");
+    } else {
+      dispatch(OnAddTodo(text));
+      setText("");
+      setError("");
     }
-  }
+  };
+  const handleUpdateTodo = (id) => {
+    // const editedTodo = prompt('Edit Todo')
+    console.log("update", todos[id]);
+    
+  };
   return (
     <>
       <input
@@ -28,16 +33,19 @@ const TodoCom = () => {
       />
       <button
         className="bg-blue-500 text-white p-2 rounded"
-        onClick={()=>(handleAddTodo())}
+        onClick={() => handleAddTodo()}
       >
         Add
       </button>
       {error}
-      {todos.map((todo,id) => {
+      {todos.map((todo, id) => {
         return (
-          <div key={id} className="bg-gray-200 m-1 p-2 rounded flex justify-between	">
+          <div
+            key={id}
+            className="bg-gray-200 m-1 p-2 rounded flex justify-between	"
+          >
             {todo}
-           <h1>edit</h1> 
+            <h1 onClick={handleUpdateTodo(id)}>edit</h1>
           </div>
         );
       })}
