@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { OnAddTodo } from "./redux_Lib/action";
 const TodoCom = () => {
@@ -6,9 +6,14 @@ const TodoCom = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [error, setError] = useState("");
+  const [update, setUpdate] = useState(false);
+  const [remove, setRemove] = useState(false);
   // CRUD ------- CREATE READ UPDATE DELETE
   // CREATE
   // UPDATING STATE
+  useEffect(()=>{
+    
+  })
   const handleAddTodo = () => {
     if (text.length === 0) {
       setError("Please enter a todo");
@@ -21,19 +26,18 @@ const TodoCom = () => {
   const handleUpdateTodo = (id) => {
     // const editedTodo = prompt('Edit Todo')
     console.log("update", todos[id]);
-    
   };
-  
+
   const handleDeleteTodo = (id) => {
-    // const editedTodo = prompt('Edit Todo')
-    todos.filter((todo,indexedDB,arr)=>{
-      if(indexedDB === id){
-        arr.splice(indexedDB,1)
+    return todos.filter((todo, indexedDB, arr) => {
+      setRemove(preVal=>!preVal)
+      if (indexedDB === id) {
+        arr.splice(indexedDB, 1);
       }
-    })
-    console.log("after delete", todos);
+    });
+    setRemove(preVal=>!preVal)
   };
-  
+
   return (
     <>
       <input
@@ -49,32 +53,32 @@ const TodoCom = () => {
       </button>
       {error}
       {todos.map((todo, id) => {
-      if (todo.length > 0){
-        
-        return (
-          <div
-            key={id}
-            className="bg-gray-200 m-1 p-2 rounded flex justify-between	"
-          >
-            {todo}
-            <div>
-            <h1 
-              className="text-blue-500" 
-              onClick={()=>handleUpdateTodo(id)}>
-              Edit
-            </h1>
-            <h1 
-              className="text-red-500" 
-              onClick={()=>handleDeleteTodo(id)}>
-              Delete
-            </h1>
+        if (todo.length > 0) {
+          return (
+            <div
+              key={id}
+              className="bg-gray-200 m-1 p-2 rounded flex justify-between	"
+            >
+              {todo}
+              <div>
+                <h1
+                  className="text-blue-500"
+                  onClick={() => handleUpdateTodo(id)}
+                >
+                  Edit
+                </h1>
+                <h1
+                  className="text-red-500"
+                  onClick={() => handleDeleteTodo(id)}
+                >
+                  Delete
+                </h1>
+              </div>
             </div>
-          </div>
-        );
-      }
-      else{
-        return;
-      }
+          );
+        } else {
+          return;
+        }
       })}
     </>
   );
