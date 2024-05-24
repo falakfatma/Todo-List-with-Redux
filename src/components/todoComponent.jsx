@@ -8,12 +8,10 @@ const TodoCom = () => {
   const [error, setError] = useState("");
   const [update, setUpdate] = useState(false);
   const [remove, setRemove] = useState(false);
+  const [isAdd, setIsAdd] = useState(true);
   // CRUD ------- CREATE READ UPDATE DELETE
   // CREATE
   // UPDATING STATE
-  useEffect(()=>{
-    
-  })
   const handleAddTodo = () => {
     if (text.length === 0) {
       setError("Please enter a todo");
@@ -25,6 +23,8 @@ const TodoCom = () => {
   };
   const handleUpdateTodo = (id) => {
     // const editedTodo = prompt('Edit Todo')
+    setText(todos[id])
+    setIsAdd("Update")
     console.log("update", todos[id]);
   };
 
@@ -45,12 +45,23 @@ const TodoCom = () => {
         onInput={(e) => setText(e.target.value)}
         value={text}
       />
-      <button
-        className="bg-blue-500 text-white p-2 rounded"
-        onClick={() => handleAddTodo()}
-      >
-        Add
-      </button>
+      {isAdd ? 
+        (
+          <button
+            className="bg-blue-500 text-white p-2 rounded"
+            onClick={() => handleAddTodo()}
+          >
+            Add
+          </button>
+        )
+        :
+        (<button
+          className="bg-blue-500 text-white p-2 rounded"
+          onClick={() => handleUpdateTodo()}
+        >
+          Update
+        </button>)
+      }
       {error}
       {todos.map((todo, id) => {
         if (todo.length > 0) {
