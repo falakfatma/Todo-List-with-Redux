@@ -10,9 +10,6 @@ const TodoCom = () => {
   const [remove, setRemove] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
   const [index, setIndex] = useState(0);
-  // CRUD ------- CREATE READ UPDATE DELETE
-  // CREATE
-  // UPDATING STATE
   const handleAddTodo = () => {
     if (text.length === 0) {
       setError("Please enter a todo");
@@ -23,13 +20,11 @@ const TodoCom = () => {
     }
   };
   const handleUpdateTodoButton = (id) => {
-    // const editedTodo = prompt('Edit Todo')
     setText(todos[id])
     setIsAdd("Update")
     setIsAdd(!isAdd)
     setIndex(id)
     setUpdate(!update)
-     // todos[id] = text
   };
 
   const handleDeleteTodoButton = (id) => {
@@ -42,8 +37,7 @@ const TodoCom = () => {
     setRemove(preVal=>!preVal)
   };
   const handleUpdateTodo = () => {
-    // return todos[index] = text
-    
+    todos[index] = text
     setUpdate(!update)
   }
   return (
