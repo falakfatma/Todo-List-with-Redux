@@ -10,7 +10,7 @@ const TodoCom = () => {
   const [remove, setRemove] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
   const [index, setIndex] = useState(0);
-  
+
   const handleAddTodo = () => {
     if (text.length === 0) {
       setError("Please enter a todo");
@@ -20,30 +20,30 @@ const TodoCom = () => {
       setError("");
     }
   };
-  
+
   const handleUpdateTodoButton = (id) => {
-    setText(todos[id])
-    setIsAdd("Update")
-    setIsAdd(!isAdd)
-    setIndex(id)
+    setText(todos[id]);
+    setIsAdd("Update");
+    setIsAdd(!isAdd);
+    setIndex(id);
   };
 
   const handleDeleteTodoButton = (id) => {
     return todos.filter((todo, indexedDB, arr) => {
-      setRemove(preVal=>!preVal)
+      setRemove((preVal) => !preVal);
       if (indexedDB === id) {
         arr.splice(indexedDB, 1);
       }
     });
-    setRemove(preVal=>!preVal)
+    setRemove((preVal) => !preVal);
   };
-  
+
   const handleUpdateTodo = () => {
     todos[index] = text;
     setText("");
-    setIsAdd(!isAdd)
-  }
-  
+    setIsAdd(!isAdd);
+  };
+
   return (
     <>
       <input
@@ -51,44 +51,45 @@ const TodoCom = () => {
         onInput={(e) => setText(e.target.value)}
         value={text}
       />
-      
-        
-          <button
-            className="bg-blue-500 text-white p-2 rounded"
-            onClick={isAdd ? (() => handleAddTodo()):  (() => handleUpdateTodo())}
-          >
-            {isAdd? "Add Todo": "Update Todo"}
-          </button>
-        
+
+      <button
+        className="bg-blue-500 text-white p-2 rounded"
+        onClick={isAdd ? () => handleAddTodo() : () => handleUpdateTodo()}
+      >
+        {isAdd ? "Add Todo" : "Update Todo"}
+      </button>
+
       {error && <p className="text-red-500">{error}</p>}
-      {todos.map((todo, id) => {
-        if (todo.length > 0) {
-          return (
-            <div
-              key={id}
-              className="bg-gray-200 m-1 p-2 rounded flex justify-between	"
-            >
-              {todo}
-              <div>
-                <h1
-                  className="text-blue-500"
-                  onClick={() => handleUpdateTodoButton(id)}
-                >
-                  Edit
-                </h1>
-                <h1
-                  className="text-red-500"
-                  onClick={() => handleDeleteTodoButton(id)}
-                >
-                  Delete
-                </h1>
+      <div className="h-[17rem] overflow-y-scroll">
+        {todos.map((todo, id) => {
+          if (todo.length > 0) {
+            return (
+              <div
+                key={id}
+                className="bg-gray-200 m-1 p-2 rounded flex justify-between	"
+              >
+                {todo}
+                <div>
+                  <h1
+                    className="text-blue-500"
+                    onClick={() => handleUpdateTodoButton(id)}
+                  >
+                    Edit
+                  </h1>
+                  <h1
+                    className="text-red-500"
+                    onClick={() => handleDeleteTodoButton(id)}
+                  >
+                    Delete
+                  </h1>
+                </div>
               </div>
-            </div>
-          );
-        } else {
-          return;
-        }
-      })}
+            );
+          } else {
+            return;
+          }
+        })}
+      </div>
     </>
   );
 };
