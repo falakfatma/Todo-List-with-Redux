@@ -26,7 +26,6 @@ const TodoCom = () => {
     setIsAdd("Update")
     setIsAdd(!isAdd)
     setIndex(id)
-    setUpdate(!update)
   };
 
   const handleDeleteTodoButton = (id) => {
@@ -40,8 +39,9 @@ const TodoCom = () => {
   };
   
   const handleUpdateTodo = () => {
-    todos[index] = text
-    setUpdate(!update)
+    todos[index] = text;
+    setText("");
+    setIsAdd(!isAdd)
   }
   
   return (
