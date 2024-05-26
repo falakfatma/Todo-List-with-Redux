@@ -9,6 +9,7 @@ const TodoCom = () => {
   const [update, setUpdate] = useState(false);
   const [remove, setRemove] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
+  const [index, setIndex] = useState(0);
   // CRUD ------- CREATE READ UPDATE DELETE
   // CREATE
   // UPDATING STATE
@@ -21,14 +22,18 @@ const TodoCom = () => {
       setError("");
     }
   };
-  const handleUpdateTodo = (id) => {
+  const handleUpdateTodoButton = (id) => {
     // const editedTodo = prompt('Edit Todo')
     setText(todos[id])
     setIsAdd("Update")
-    console.log("update", todos[id]);
+    console.log("update");
+    setIsAdd(!isAdd)
+    setIndex(id)
+    setUpdate(!update)
+     // todos[id] = text
   };
 
-  const handleDeleteTodo = (id) => {
+  const handleDeleteTodoButton = (id) => {
     return todos.filter((todo, indexedDB, arr) => {
       setRemove(preVal=>!preVal)
       if (indexedDB === id) {
@@ -37,7 +42,12 @@ const TodoCom = () => {
     });
     setRemove(preVal=>!preVal)
   };
-
+  const handleUpdateTodo = () => {
+    // return todos[index] = text
+    
+    console.log("updateed congo ==========",todos[index] = text)
+    setUpdate(!update)
+  }
   return (
     <>
       <input
@@ -45,24 +55,17 @@ const TodoCom = () => {
         onInput={(e) => setText(e.target.value)}
         value={text}
       />
-      {isAdd ? 
-        (
+      
+        
           <button
             className="bg-blue-500 text-white p-2 rounded"
-            onClick={() => handleAddTodo()}
+            onClick={isAdd ? (() => handleAddTodo()):  (() => handleUpdateTodo())}
           >
-            Add
+            {isAdd? "Add Todo": "Update Todo"}
           </button>
-        )
-        :
-        (<button
-          className="bg-blue-500 text-white p-2 rounded"
-          onClick={() => handleUpdateTodo()}
-        >
-          Update
-        </button>)
-      }
+        
       {error}
+      {update}
       {todos.map((todo, id) => {
         if (todo.length > 0) {
           return (
@@ -74,13 +77,13 @@ const TodoCom = () => {
               <div>
                 <h1
                   className="text-blue-500"
-                  onClick={() => handleUpdateTodo(id)}
+                  onClick={() => handleUpdateTodoButton(id)}
                 >
                   Edit
                 </h1>
                 <h1
                   className="text-red-500"
-                  onClick={() => handleDeleteTodo(id)}
+                  onClick={() => handleDeleteTodoButton(id)}
                 >
                   Delete
                 </h1>
