@@ -10,6 +10,7 @@ const TodoCom = () => {
   const [remove, setRemove] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
   const [index, setIndex] = useState(0);
+  
   const handleAddTodo = () => {
     if (text.length === 0) {
       setError("Please enter a todo");
@@ -19,6 +20,7 @@ const TodoCom = () => {
       setError("");
     }
   };
+  
   const handleUpdateTodoButton = (id) => {
     setText(todos[id])
     setIsAdd("Update")
@@ -36,10 +38,12 @@ const TodoCom = () => {
     });
     setRemove(preVal=>!preVal)
   };
+  
   const handleUpdateTodo = () => {
     todos[index] = text
     setUpdate(!update)
   }
+  
   return (
     <>
       <input
@@ -56,8 +60,7 @@ const TodoCom = () => {
             {isAdd? "Add Todo": "Update Todo"}
           </button>
         
-      {error}
-      {update}
+      {error && <p className="text-red-500">{error}</p>}
       {todos.map((todo, id) => {
         if (todo.length > 0) {
           return (
