@@ -26,7 +26,6 @@ const TodoCom = () => {
     // const editedTodo = prompt('Edit Todo')
     setText(todos[id])
     setIsAdd("Update")
-    console.log("update");
     setIsAdd(!isAdd)
     setIndex(id)
     setUpdate(!update)
@@ -45,7 +44,6 @@ const TodoCom = () => {
   const handleUpdateTodo = () => {
     // return todos[index] = text
     
-    console.log("updateed congo ==========",todos[index] = text)
     setUpdate(!update)
   }
   return (
