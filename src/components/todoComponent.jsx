@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { OnAddTodo } from "./redux_Lib/action";
 const TodoCom = () => {
@@ -6,7 +6,6 @@ const TodoCom = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [error, setError] = useState("");
-  const [update, setUpdate] = useState(false);
   const [remove, setRemove] = useState(false);
   const [isAdd, setIsAdd] = useState(true);
   const [index, setIndex] = useState(0);
@@ -35,7 +34,6 @@ const TodoCom = () => {
         arr.splice(indexedDB, 1);
       }
     });
-    setRemove((preVal) => !preVal);
   };
 
   const handleUpdateTodo = () => {
